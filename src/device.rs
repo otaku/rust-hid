@@ -97,7 +97,7 @@ impl<'a> Device<'a> {
 	/// Opens the device to use it.
 	pub fn open(&self) -> error::Result<Handle> {
 		unsafe {
-			let handle = hid_open((*self.ptr).vendor_id, (*self.ptr).product_id, (*self.ptr).serial_number);
+			let handle = hid_open_path((*self.ptr).path);
 
 			if handle.is_null() {
 				return Err(Error::NotFound);
